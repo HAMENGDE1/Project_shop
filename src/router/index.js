@@ -1,23 +1,51 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '@/pages/Home/Home.vue'
+import Search from '@/pages/Search/Search.vue'
+import Register from '@/pages/Register/Register.vue'
+import Login from '@/pages/Login/Login.vue'
+
 
 Vue.use(VueRouter)
 
 const routes = [
+  // 路由重定向
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path:'/',
+    redirect: '/home',
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path:'/home',
+    component:Home,
+    // 路由元信息
+    meta:{showFooter:true}
+  },
+  {
+    path:'/search/:keyword?',
+    component:Search,
+    meta:{showFooter:true},
+    name:'search',
+    // 4:路由组件能不能传递props数据
+    //  布尔值写法:params
+    // props:true
+    // 对象写法
+    // props:{a:1,b:2}
+    // 函数写法:可以params参数,query参数,通过props传递路由组件
+    props:($route)=>{
+      return {keyword:$route.params.keyword,k:$route.query.k}
+    }
+  },
+  {
+    path:'/Login',
+    component:Login,
+    meta:{showFooter:false}
+  },
+  {
+    path:'/register',
+    component:Register,
+    meta:{showFooter:false}
   }
+
 ]
 
 const router = new VueRouter({
