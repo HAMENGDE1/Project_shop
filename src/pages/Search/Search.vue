@@ -1,23 +1,20 @@
 <template>
   <div>
-<h1>{{a}}</h1>
+    <Typenav></Typenav>
  </div>
 </template>
 
-<script>
+<script> 
 export default {
   name: 'Search',
   // 路由组件可以传递props
-  props:['a','b'],
+  // props:['keyword','k','a','b'],
   data() { 
     return {
- 
+   
     }
   },
   components:{
-  },
-  methods:{
-
   },
   mounted() {
 

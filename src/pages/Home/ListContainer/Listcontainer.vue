@@ -3,28 +3,19 @@
             <div class="sortList clearfix">
                 <div class="center">
                     <!--banner轮播-->
-                    <div class="swiper-container" id="mySwiper">
+                    <!-- <div class="swiper-container" ref="mySwiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img src="./images/banner1.jpg" />
+                            <div class="swiper-slide" v-for="carousel in getBannerList" :key="carousel.id">
+                                <img :src="carousel.imgUrl" />
                             </div>
-                            <!-- <div class="swiper-slide">
-                                <img src="./images/banner2.jpg" />
-                            </div>
-                            <div class="swiper-slide">
-                                <img src="./images/banner3.jpg" />
-                            </div>
-                            <div class="swiper-slide">
-                                <img src="./images/banner4.jpg" />
-                            </div> -->
                         </div>
-                        <!-- 如果需要分页器 -->
-                        <div class="swiper-pagination"></div>
+                        <div class="swiper-pagination"></div> 
 
-                        <!-- 如果需要导航按钮 -->
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
-                    </div>
+                        如果需要导航按钮 
+                         <div class="swiper-button-prev"></div> 
+                         <div class="swiper-button-next"></div> 
+                     </div>  -->
+                     <Carousel :list='getBannerList' />
                 </div>
                 <div class="right">
                     <div class="news">
@@ -47,7 +38,7 @@
                                 <span class="bold">[公告]</span>备战开学季 全民半价购数码
                             </li>
                             <li>
-                                <span class="bold">[特惠]</span>备战开学季 全民半价购数码
+                                <span class="bold">[特惠] </span>备战开学季 全民半价购数码
                             </li>
                         </ul>
                     </div>
@@ -110,6 +101,8 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+// import Swiper from 'swiper'
 export default {
   name: 'Listcontainer',
   data() { 
@@ -117,13 +110,54 @@ export default {
 
     }
   },
+  computed:{
+      ...mapState({
+          getBannerList:  state =>state.home.getBannerList,
+      })
+  },
+  watch:{
+    //   监听getBannerList数据的变化,
+    // 对象写法
+//     getBannerList:{
+//         handler(newValue,oldValue){
+
+//     this.$nextTick(()=>{
+//     // 初始化Swiper,初始化之前现有结构
+//     var mySwiper = new Swiper (
+//         this.$refs.mySwiper, {
+//     // direction: 'vertical', // 垂直切换选项
+//     loop: true, // 循环模式选项
+    
+//     // 如果需要分页器
+//     pagination: {
+//       el: '.swiper-pagination',
+//       clickable:true
+//     },
+    
+//     // 如果需要前进后退按钮
+//     navigation: {
+//       nextEl: '.swiper-button-next',
+//       prevEl: '.swiper-button-prev',
+
+//     },
+    
+//     // 如果需要滚动条
+//     scrollbar: {
+//       el: '.swiper-scrollbar',
+//     },
+//   })  
+//             })
+//         }
+//     }
+  },
   components:{
   },
   methods:{
 
   },
   mounted() {
-
+    //   派发action:通过Vuex发起ajax请求,将数据存储到仓库中
+    this.$store.dispatch('getBannerList') 
   },
  }
 </script>

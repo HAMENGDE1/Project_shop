@@ -1,5 +1,6 @@
 <template>
   <div>
+       <!-- <router-link to='/search/123'>进入search页面</router-link> -->
         <!-- 头部 -->
         <header class="header">
             <!-- 头部的第一行 -->
@@ -59,22 +60,29 @@ export default {
         // 路由传递参数:
         // 第一种:字符串形式
         // this.$router.push('/search/' + this.keyword)
+        // this.$router.push({name:'search',params:{keyword:this.keyword}})
         // 第二种:模板字符串
         // this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()}`)
         // 第三种:对象
+        // this.$router.push({name:'search',params:{keyword:this.keyword}})
         // this.$router.push({name:'search',params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
         // 1 :面试题1:路由传递参数(对象写法)path是否可以结合params参数一起使用
-        //this.$router.push({path:'/search',params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
+        // this.$router.push({path:'/search',params:{keyword:this.keyword}})
+        // this.$router.push({path:'/search',params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
         // 2:如何指定params参数可传可不传
         // 答:在配置路由时候,在占位的后面加上一个问号,(paramns可以传递参数或者不传递)
         // this.$router.push({name:'search',query:{k:this.keyword.toUpperCase()}})
         // 3:params参数可以传递也可以不传,但如果传递的是空串,如何解决
         // 答:使用undefined解决,params参数可以传递或者不传递(空的字符串)
         // this.$router.push({name:'search',params:{keyword:'' || undefined},query:{k:this.keyword.toUpperCase()}})
-        // 4:路由组件能不能传递prop数据
+        // 4:路由组件能不能传递prop数据 
         // 可以的,有三种写法
-    this.$router.push({name:'search',params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
-
+    // this.$router.push({name:'search',params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
+            if(this.$route.query){
+                let location ={name:'search',params:{keyword:this.keyword || undefined}}
+                location.query = this.$route.query
+                this.$router.push(location)
+            }
 
          
     }
